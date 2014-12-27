@@ -11,6 +11,11 @@ var connection = mysql.createConnection({
   database: 'flappy_scores'
 });
 
+app.get("/", function(request, response) {
+
+    response.send("gotcha!");
+});
+
 app.get(/^\/users\/(\w{3,})\/score\/(\d+)$/, function(request, response) {
 
     var user  = { name: connection.escape(request.params[0]), score: connection.escape(request.params[1]) };
