@@ -17,7 +17,7 @@ app.get("/", function(request, response) {
 });
 
 app.get(/^\/users\/(\w{3,})\/score\/(\d+)$/, function(request, response) {
-
+response.send("score!");
     /*var user  = { name: connection.escape(request.params[0]), score: connection.escape(request.params[1]) };
     var query = connection.query('INSERT INTO scores SET ?', user, function(err, result) {
       if (err) throw err;
