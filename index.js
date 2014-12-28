@@ -26,7 +26,7 @@ var conString = "pg://postgres:fl4ppysc0r3@localhost:5000/flappy_backend";
 
 var a = 1;
 app.get("/", function(request, response) {
-    
+    //console.log("database url=", conString);
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
     
         client.query('INSERT INTO scores (name,score) VALUES ($1,$2) RETURNING (id, name, score)', ['Working?', 101], function(err, result) {
@@ -59,10 +59,6 @@ app.get(/^\/users\/(\w{3,})\/score\/(\d+)$/, function(request, response) {
         result.user = user;
         response.send(result);
     });*/
-});
-
-app.listen(5432, function() {
-    console.log("listening to port 5432 too!");
 });
 
 app.listen(app.get('port'), function() {
