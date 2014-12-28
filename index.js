@@ -4,12 +4,13 @@ var app = express();
 
 app.set('port', (process.env.PORT || 3000));
 
+var islocal = !process.env.PORT;
 var pg = require("pg")
 var http = require("http")
 var port = 5000;
 var host = '127.0.0.1';
 
-var conString = "pg://postgres:fl4ppysc0r3@localhost:5000/flappy_backend";
+var conString = "postgres://postgres:fl4ppysc0r3@localhost:5432/flappy_backend";
 //var client = new pg.Client(conString);
 //client.connect();
 
@@ -27,13 +28,13 @@ var conString = "pg://postgres:fl4ppysc0r3@localhost:5000/flappy_backend";
 var a = 1;
 app.get("/", function(request, response) {
     //console.log("database url=", conString);
-    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+    pg.connect(islocal ? conString : process.env.DATABASE_URL, function(err, client, done) {
     
         client.query('INSERT INTO scores (name,score) VALUES ($1,$2) RETURNING (id, name, score)', ['Working?', 101], function(err, result) {
             if (err) {
-                console.log(err);
+                response.send(err);
             } else {
-                console.log('row inserted with id: ' + JSON.stringify(result));
+                response.send('row inserted with id: ' + JSON.stringify(result));
             }
             done();
         });
@@ -48,7 +49,7 @@ app.get("/", function(request, response) {
         
     });*/
     
-    response.send("gotcha!");
+    //response.write("gotcha!");
 });
 
 app.get(/^\/users\/(\w{3,})\/score\/(\d+)$/, function(request, response) {
