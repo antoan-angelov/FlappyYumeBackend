@@ -4,7 +4,7 @@ var app = express();
 
 app.set('port', (process.env.PORT || 3000));
 
-var islocal = !process.env.PORT;
+var islocal = false;
 var pg = require("pg")
 var http = require("http")
 var port = 5000;
