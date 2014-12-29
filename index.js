@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 app.set('port', (process.env.PORT || 3000));
 app.use(bodyParser.json());
 
-var islocal = true;
+var islocal = false;
 var conString = "postgres://postgres:fl4ppysc0r3@localhost:5432/flappy_backend";
 var databaseUrl = islocal ? conString : process.env.DATABASE_URL;
 
