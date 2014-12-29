@@ -32,7 +32,7 @@ app.post("/insert", function(request, response) {
                     done();
                 }
                 else {                
-                    if(result.rows.length > 0) {
+                    if(result.rows.length > 0 && result.rows[0].id < request.body.id) {
                         client.query('UPDATE scores SET score = $1 WHERE id = $2', [request.body.score, request.body.id], function(err, result) {
                             if (err) {
                                 response.send(err);
