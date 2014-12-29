@@ -17,8 +17,8 @@ app.get("/scores", function(request, response) {
 });
 
 app.post("/insert", function(request, response) {
-    if(!request.body.name || !request.body.score) {
-        response.send('{"error":"Required POST parameters name and score are missing.", "text":'+JSON.stringify(request.body)+'}');
+    if(!request.body.name || isNaN(request.body.score)) {
+        response.send('{"error":"Required POST parameters name and score are missing.", "requestBody":'+JSON.stringify(request.body)+'}');
         return;
     }    
 
