@@ -4,7 +4,7 @@ var pg = require("pg");
 
 app.set('port', (process.env.PORT || 3000));
 
-var islocal = true;
+var islocal = false;
 var conString = "postgres://postgres:fl4ppysc0r3@localhost:5432/flappy_backend";
 var databaseUrl = islocal ? conString : process.env.DATABASE_URL;
 
